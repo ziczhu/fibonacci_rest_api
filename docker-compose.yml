@@ -1,0 +1,22 @@
+version: "3"
+services:
+  fibonacci:
+    ports:
+      - "8080"
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: on-failure
+    environment:
+      - PORT=8080
+      - MAX_FIB_INPUT=10000
+      - MAX_FIB_CACHE_SIZE=5000
+      - INIT_FIB_CACHE_SIZE=1000
+
+  nginx:
+    build: "./nginx"
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - "fibonacci"
