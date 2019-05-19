@@ -84,13 +84,9 @@ func TestGetFibonacci(t *testing.T) {
 
 		for _, n := range runs {
 			wg.Add(1)
-			// Launch a goroutine to fetch the URL.
 			go func(num int) {
-				// Decrement the counter when the goroutine completes.
 				defer wg.Done()
-				// Fetch the URL.
 				ret := fib.GetSequence(num)
-
 				for _, d := range data {
 					assert.Equal(t, ret[d.n], d.want)
 				}
